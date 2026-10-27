@@ -1,0 +1,88 @@
+---
+import SEO from '../components/SEO.astro';
+import FloatingContact from '../components/FloatingContact.astro';
+import { BUSINESS, HOTELS, BLOG_POSTS } from '../data/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  schema?: object | object[];
+}
+
+const { title, description, path, image, schema } = Astro.props;
+---
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <SEO title={title} description={description} path={path} image={image} schema={schema} />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+  </head>
+  <body class="font-vazir bg-sand-50 text-gray-800 antialiased min-h-screen flex flex-col">
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-sand-200">
+      <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-2 font-bold text-brand-700 text-lg">
+          <span class="inline-block w-8 h-8 rounded-lg bg-brand-600 text-white flex items-center justify-center">آ</span>
+          آکای تراول
+        </a>
+        <ul class="hidden md:flex items-center gap-5 text-sm">
+          <li><a href="/" class="hover:text-brand-600 transition-colors">خانه</a></li>
+          <li><a href="/hotels" class="hover:text-brand-600 transition-colors">هتل‌ها</a></li>
+          <li><a href="/tours/urmia-van-combined-tour" class="hover:text-brand-600 transition-colors">تورها</a></li>
+          <li><a href="/restaurants/best-urmia-restaurants" class="hover:text-brand-600 transition-colors">رستوران‌ها</a></li>
+          <li><a href="/transport/urmia-vehicle-rental" class="hover:text-brand-600 transition-colors">حمل‌ونقل</a></li>
+          <li><a href="/blog" class="hover:text-brand-600 transition-colors">بلاگ</a></li>
+          <li><a href="/contact" class="hover:text-brand-600 transition-colors">تماس</a></li>
+        </ul>
+        <a href={`tel:${BUSINESS.phoneIntl}`} class="text-sm font-semibold text-brand-700 md:hidden">تماس</a>
+      </nav>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 mt-12">
+      <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+        <div>
+          <h3 class="text-white font-bold mb-3">{BUSINESS.name}</h3>
+          <p class="leading-7 text-gray-400">مجوز: {BUSINESS.license}</p>
+          <p class="leading-7 text-gray-400">{BUSINESS.address}</p>
+        </div>
+        <div>
+          <h3 class="text-white font-bold mb-3">لینک‌های سریع</h3>
+          <ul class="space-y-2">
+            <li><a href="/" class="hover:text-white">خانه</a></li>
+            <li><a href="/hotels" class="hover:text-white">هتل‌های ارومیه</a></li>
+            <li><a href="/tours/urmia-van-combined-tour" class="hover:text-white">تور ارومیه به وان</a></li>
+            <li><a href="/tours/urmia-cultural-historical-tour" class="hover:text-white">تور فرهنگی ارومیه</a></li>
+            <li><a href="/contact" class="hover:text-white">تماس با ما</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-white font-bold mb-3">هتل‌ها</h3>
+          <ul class="space-y-2">
+            {HOTELS.slice(0, 6).map((h) => (
+              <li><a href={`/hotels/${h.slug}`} class="hover:text-white">{h.nameFa}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-white font-bold mb-3">مقالات</h3>
+          <ul class="space-y-2">
+            {BLOG_POSTS.slice(0, 5).map((b) => (
+              <li><a href={`/blog/${b.slug}`} class="hover:text-white">{b.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 py-4 text-center text-xs text-gray-500">
+        © {BUSINESS.name} — {BUSINESS.domain}
+      </div>
+    </footer>
+
+    <FloatingContact />
+  </body>
+</html>

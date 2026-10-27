@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReservationButtons from '../../components/ReservationButtons.astro';
+
+const title = 'سالن هتل آنا ارومیه | رزرو سالن رویداد';
+const description = 'رزرو سالن هتل آنا ارومیه برای برگزاری رویدادها و جلسات با آکای تراول.';
+
+const venueSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EventVenue',
+  name: 'سالن هتل آنا ارومیه',
+  address: { '@type': 'PostalAddress', addressLocality: 'ارومیه' },
+  url: 'https://hotelurmia.ir/halls/ana-hotel-urmia',
+};
+---
+<BaseLayout title={title} description={description} path="/halls/ana-hotel-urmia" schema={venueSchema}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <!-- TODO: real photo -->
+    <img src="/images/ana-hall-urmia.webp" alt="سالن هتل آنا ارومیه" width="1200" height="630" class="w-full h-64 md:h-80 object-cover rounded-2xl mb-6" fetchpriority="high" />
+    <h1 class="text-2xl md:text-3xl font-bold text-brand-800 mb-3">سالن هتل آنا ارومیه</h1>
+    <p class="text-gray-700 leading-8 mb-6">سالن هتل آنا ارومیه برای برگزاری رویدادها، جلسات و مراسم‌ها قابل رزرو است. برای اطلاع از جزئیات و قیمت دقیق، با دفتر آکای تراول تماس بگیرید.</p>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-3">امکانات و رزرو</h2>
+      <p class="text-gray-700 leading-8 mb-4">برای اطلاع از جزئیات و قیمت دقیق، با دفتر آکای تراول تماس بگیرید. ظرفیت، تجهیزات و شرایط رزرو از طریق تماس مستقیم اعلام می‌شود.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-4">سرویس‌های تکمیلی و رزرو</h2>
+      <ReservationButtons pageName="سالن هتل آنا ارومیه" />
+    </section>
+
+    <nav class="text-sm text-gray-500">
+      <a href="/hotels/ana-urmia" class="text-brand-600 hover:underline">→ هتل آنا ارومیه</a> | <a href="/hotels" class="text-brand-600 hover:underline">لیست هتل‌ها</a> | <a href="/" class="text-brand-600 hover:underline">خانه</a>
+    </nav>
+  </article>
+</BaseLayout>

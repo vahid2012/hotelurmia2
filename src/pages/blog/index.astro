@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { BLOG_POSTS } from '../../data/site';
+
+const title = 'بلاگ سفر ارومیه | آکای تراول';
+const description = 'مقالات راهنمای سفر به ارومیه، تورها، هتل‌ها و جاذبه‌های گردشگری آذربایجان غربی.';
+---
+<BaseLayout title={title} description={description} path="/blog">
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="text-2xl md:text-3xl font-bold text-brand-800 mb-4">بلاگ سفر ارومیه</h1>
+    <p class="text-gray-600 mb-8 max-w-3xl">راهنمای سفر به ارومیه و آذربایجان غربی؛ از تورهای طبیعت‌گردی تا گشت شهری و استاندارد هتل‌ها.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {BLOG_POSTS.map((b) => (
+        <a href={`/blog/${b.slug}`} class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-sand-200">
+          <!-- TODO: real photo -->
+          <img src={b.image} alt={b.title} width="300" height="200" class="w-full h-40 object-cover" loading="lazy" />
+          <div class="p-4">
+            <span class="text-xs text-brand-600">{b.category}</span>
+            <h2 class="font-bold text-sm text-gray-900 leading-6 mt-1">{b.title}</h2>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

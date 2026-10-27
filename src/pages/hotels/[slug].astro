@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReservationButtons from '../../components/ReservationButtons.astro';
+import { HOTELS, BLOG_POSTS } from '../../data/site';
+import { HOTEL_CONTENT } from '../../data/hotel-content';
+
+export async function getStaticPaths() {
+  return HOTELS.map((h) => ({ params: { slug: h.slug }, props: { hotel: h } }));
+}
+
+const { hotel } = Astro.props;
+const content = HOTEL_CONTENT[hotel.slug];
+const related = BLOG_POSTS.filter((b) => !hotel.externalLinks?.some((l) => l.anchor.includes(b.title))).slice(0, 3);
+
+const title = `${hotel.tagline} | آکای تراول`;
+const description = hotel.excerpt.slice(0, 155);
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: content.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const hotelSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Hotel',
+  name: hotel.nameFa,
+  image: hotel.image,
+  description: hotel.excerpt,
+  ...(hotel.star ? { starRating: { '@type': 'Rating', ratingValue: String(hotel.star) } } : {}),
+  url: `https://hotelurmia.ir/hotels/${hotel.slug}`,
+};
+---
+<BaseLayout title={title} description={description} path={`/hotels/${hotel.slug}`} image={hotel.image} schema={[hotelSchema, faqSchema]}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <!-- TODO: replace with real photo -->
+    <img src={hotel.image} alt={`${hotel.nameFa} — نمای بیرونی هتل در ارومیه`} width="1200" height="630" class="w-full h-64 md:h-80 object-cover rounded-2xl mb-6" fetchpriority="high" />
+    <h1 class="text-2xl md:text-3xl font-bold text-brand-800 mb-3">{hotel.tagline}</h1>
+    {hotel.star && <p class="text-amber-600 text-lg mb-3">{'★'.repeat(hotel.star)}</p>}
+    <p class="text-gray-700 leading-8 mb-6">{content.intro}</p>
+
+    <div class="space-y-8 mb-8">
+      {content.sections.map((s) => (
+        <section>
+          <h2 class="text-xl font-bold text-brand-700 mb-3">{s.heading}</h2>
+          <p class="text-gray-700 leading-8 mb-4">{s.body}</p>
+          {s.image && (
+            <>
+              <!-- TODO: replace with real photo -->
+              <img src={s.image} alt={s.imageAlt} width="800" height="500" class="w-full h-56 object-cover rounded-xl" loading="lazy" />
+            </>
+          )}
+        </section>
+      ))}
+    </div>
+
+    <section class="bg-white rounded-2xl p-5 border border-sand-200 mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-4">چرا از آکای تراول رزرو کنید؟</h2>
+      <ul class="space-y-2">
+        {content.whyBook.map((w) => (
+          <li class="flex items-start gap-2 text-sm text-gray-700">
+            <span class="text-brand-600 mt-1">✓</span>
+            <span>{w}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {hotel.externalLinks && hotel.externalLinks.length > 0 && (
+      <section class="bg-sand-50 rounded-xl p-4 mb-8 text-sm">
+        <h2 class="font-bold mb-2">پیوندهای مرتبط</h2>
+        {hotel.externalLinks.map((l) => (
+          <p class="mb-1"><a href={l.url} target="_blank" rel="noopener" class="text-brand-600 hover:underline">{l.anchor}</a></p>
+        ))}
+      </section>
+    )}
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-4">سرویس‌های تکمیلی و رزرو</h2>
+      <ReservationButtons pageName={hotel.nameFa} />
+    </section>
+
+    <section class="bg-sand-50 rounded-xl p-5 mb-8">
+      <h2 class="text-lg font-bold text-brand-700 mb-3">سؤالات متداول</h2>
+      <div class="space-y-4">
+        {content.faq.map((f) => (
+          <div>
+            <h3 class="font-semibold text-gray-900 mb-1">{f.q}</h3>
+            <p class="text-sm text-gray-600 leading-7">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-lg font-bold text-brand-700 mb-4">مقالات مرتبط</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {related.map((b) => (
+          <a href={`/blog/${b.slug}`} class="bg-white rounded-xl p-4 border border-sand-200 hover:border-brand-300 transition-colors">
+            <h3 class="font-semibold text-sm text-gray-900 leading-6">{b.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <nav class="text-sm text-gray-500">
+      <a href="/hotels" class="text-brand-600 hover:underline">← لیست هتل‌ها</a> | <a href="/" class="text-brand-600 hover:underline">خانه</a> | <a href="/tours/urmia-van-combined-tour" class="text-brand-600 hover:underline">تور ارومیه به وان</a>
+    </nav>
+  </article>
+</BaseLayout>

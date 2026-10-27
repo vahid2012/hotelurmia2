@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReservationButtons from '../../components/ReservationButtons.astro';
+
+const title = 'تور ترکیبی ارومیه به وان | سفر یک‌روزه به ترکیه';
+const description = 'تور ترکیبی ارومیه به وان برای سفر یک‌روزه به ترکیه؛ مسیر، جاذبه‌های وان و رزرو با آکای تراول.';
+
+const tourSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristTrip',
+  name: 'تور ترکیبی ارومیه به وان',
+  description,
+  url: 'https://hotelurmia.ir/tours/urmia-van-combined-tour',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'تور ارومیه به وان چند روزه است؟', acceptedAnswer: { '@type': 'Answer', text: 'برای اطلاع از جزئیات دقیق مدت تور، با دفتر آکای تراول تماس بگیرید.' } },
+    { '@type': 'Question', name: 'قیمت تور ارومیه به وان چقدر است؟', acceptedAnswer: { '@type': 'Answer', text: 'برای اطلاع از جزئیات دقیق قیمت، با دفتر آکای تراول تماس بگیرید.' } },
+    { '@type': 'Question', name: 'آیا برای سفر به وان پاسپورت لازم است؟', acceptedAnswer: { '@type': 'Answer', text: 'بله، برای سفر به ترکیه پاسپورت معتبر لازم است.' } },
+    { '@type': 'Question', name: 'جاذبه‌های وان چیست؟', acceptedAnswer: { '@type': 'Answer', text: 'جاذبه‌های وان شامل دریاچه وان، قلعه وان، کلیسای آختامار و گربه وان هستند.' } },
+  ],
+};
+---
+<BaseLayout title={title} description={description} path="/tours/urmia-van-combined-tour" schema={[tourSchema, faqSchema]}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <!-- TODO: replace with real photo -->
+    <img src="/images/urmia-van-tour.webp" alt="تور ترکیبی ارومیه به وان با جاذبه‌های وان" width="1200" height="630" class="w-full h-64 md:h-80 object-cover rounded-2xl mb-6" fetchpriority="high" />
+    <h1 class="text-2xl md:text-3xl font-bold text-brand-800 mb-4">تور ترکیبی ارومیه به وان</h1>
+    <p class="text-gray-700 leading-8 mb-6">تور ترکیبی ارومیه به وان، فرصتی برای سفر یک‌روزه از ارومیه به شهر وان ترکیه فراهم می‌کند. این تور با مسیری که از ارومیه آغاز و پس از بازدید از جاذبه‌های وان به ارومیه بازمی‌گردد، تجربه‌ای متفاوت از سفر跨境 فراهم می‌کند. وان با جاذبه‌هایی مانند دریاچه وان، قلعه وان و کلیسای آختامار، مقصدی جذاب برای مسافرانی است که به دنبال تجربه‌ای فراتر از مرزها هستند. آکای تراول به‌عنوان آژانس دارای مجوز از سازمان میراث فرهنگی، گردشگری و صنایع دستی آذربایجان غربی، در زمینه برنامه‌ریزی این تور به مسافران کمک می‌کند.</p>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-3">مسیر تور ارومیه به وان</h2>
+      <p class="text-gray-700 leading-8 mb-4">مسیر تور ارومیه به وان از ارومیه آغاز و پس از عبور از مرز رازی به وان می‌رسد. این مسیر با عبور از مناطق کوهستانی و مرزی، منظره‌های متنوعی ارائه می‌دهد. پس از بازدید از جاذبه‌های وان، تور از همان مسیر به ارومیه بازمی‌گردد. مدت زمان سفر با توجه به فاصله و زمان مرزی، معمولاً یک روز کامل را در بر می‌گیرد. برای مسافرانی که در <a href="/hotels" class="text-brand-600">هتل‌های ارومیه</a> اقامت دارند، این تور گزینه‌ای مناسب برای گشت یک‌روزه است.</p>
+      <!-- TODO: replace with real photo -->
+      <img src="/images/van-route.webp" alt="مسیر تور ارومیه به وان از مرز رازی" width="800" height="500" class="w-full h-56 object-cover rounded-xl my-4" loading="lazy" />
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-3">جاذبه‌های وان</h2>
+      <p class="text-gray-700 leading-8 mb-4">وان با جاذبه‌های متعدد، مقصدی جذاب برای سفر است. جاذبه‌های شناخته‌شده وان در جدول زیر آمده‌اند:</p>
+      <div class="bg-white rounded-xl border border-sand-200 overflow-hidden">
+        <table class="w-full text-sm text-gray-700">
+          <thead class="bg-sand-100">
+            <tr><th class="text-right p-3 font-bold">جاذبه</th><th class="text-right p-3 font-bold">ویژگی</th></tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-sand-200"><td class="p-3 font-semibold">دریاچه وان</td><td class="p-3">بزرگ‌ترین دریاچه منطقه</td></tr>
+            <tr class="border-t border-sand-200"><td class="p-3 font-semibold">قلعه وان</td><td class="p-3">قلعه تاریخی با ارزش فرهنگی</td></tr>
+            <tr class="border-t border-sand-200"><td class="p-3 font-semibold">کلیسای آختامار</td><td class="p-3">کلیسای تاریخی در جزیره دریاچه وان</td></tr>
+            <tr class="border-t border-sand-200"><td class="p-3 font-semibold">گربه وان</td><td class="p-3">نژاد شناخته‌شده گربه با چشمان متفاوت</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- TODO: replace with real photo -->
+      <img src="/images/van-lake.webp" alt="دریاچه وان در ترکیه" width="800" height="500" class="w-full h-56 object-cover rounded-xl my-4" loading="lazy" />
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-3">مدارک لازم برای سفر به وان</h2>
+      <p class="text-gray-700 leading-8 mb-4">برای سفر به وان ترکیه، پاسپورت معتبر لازم است. مسافرانی که قصد شرکت در تور ارومیه به وان را دارند، باید پیش از سفر از اعتبار پاسپورت خود اطمینان حاصل کنند. برای اطلاع از جزئیات دقیق مدارک لازم و شرایط سفر، با دفتر آکای تراول تماس بگیرید.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-3">اقامت در ارومیه برای تور وان</h2>
+      <p class="text-gray-700 leading-8 mb-4">برای مسافرانی که قصد شرکت در تور وان را دارند، اقامت در ارومیه پایه‌ای برای آغاز تور است. <a href="/hotels/toral-urmia" class="text-brand-600">مجتمع گردشگری تورال</a> با حضور دفتر آکای تراول، پایانه‌ای مناسب برای آغاز تور است. <a href="/hotels/ana-urmia" class="text-brand-600">هتل آنا ارومیه</a> با سطح پنج ستاره و <a href="/hotels/jahangardi-urmia" class="text-brand-600">هتل جهانگردی ارومیه</a> با سطح چهار ستاره، گزینه‌هایی برای اقامت هستند.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-4">رزرو تور</h2>
+      <ReservationButtons pageName="تور ترکیبی ارومیه به وان" />
+    </section>
+
+    <section class="bg-sand-50 rounded-xl p-5 mb-8">
+      <h2 class="text-lg font-bold text-brand-700 mb-3">سؤالات متداول</h2>
+      <div class="space-y-4">
+        <div><h3 class="font-semibold text-gray-900 mb-1">تور ارومیه به وان چند روزه است؟</h3><p class="text-sm text-gray-600 leading-7">برای اطلاع از جزئیات دقیق مدت تور، با دفتر آکای تراول تماس بگیرید.</p></div>
+        <div><h3 class="font-semibold text-gray-900 mb-1">قیمت تور ارومیه به وان چقدر است؟</h3><p class="text-sm text-gray-600 leading-7">برای اطلاع از جزئیات دقیق قیمت، با دفتر آکای تراول تماس بگیرید.</p></div>
+        <div><h3 class="font-semibold text-gray-900 mb-1">آیا برای سفر به وان پاسپورت لازم است؟</h3><p class="text-sm text-gray-600 leading-7">بله، برای سفر به ترکیه پاسپورت معتبر لازم است.</p></div>
+        <div><h3 class="font-semibold text-gray-900 mb-1">جاذبه‌های وان چیست؟</h3><p class="text-sm text-gray-600 leading-7">جاذبه‌های وان شامل دریاچه وان، قلعه وان، کلیسای آختامار و گربه وان هستند.</p></div>
+      </div>
+    </section>
+
+    <nav class="text-sm text-gray-500">
+      <a href="/" class="text-brand-600 hover:underline">خانه</a> | <a href="/tours/urmia-cultural-historical-tour" class="text-brand-600 hover:underline">تور فرهنگی ارومیه</a> | <a href="/hotels" class="text-brand-600 hover:underline">هتل‌ها</a> | <a href="/blog/urmia-city-tour-guide" class="text-brand-600 hover:underline">گشت شهری ارومیه</a>
+    </nav>
+  </article>
+</BaseLayout>

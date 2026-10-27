@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReservationButtons from '../../components/ReservationButtons.astro';
+import { BUSINESS } from '../../data/site';
+
+const title = 'اجاره خودرو در ارومیه | آکای تراول';
+const description = 'اجاره خودرو، ون و تاکسی در ارومیه با آکای تراول؛ حمل‌ونقل ویژه مسافران.';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'اجاره خودرو',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: BUSINESS.name,
+    telephone: BUSINESS.phoneIntl,
+    address: { '@type': 'PostalAddress', addressLocality: 'ارومیه' },
+  },
+  url: 'https://hotelurmia.ir/transport/urmia-vehicle-rental',
+};
+---
+<BaseLayout title={title} description={description} path="/transport/urmia-vehicle-rental" schema={serviceSchema}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <!-- TODO: real photo -->
+    <img src="/images/urmia-vehicle-rental.webp" alt="اجاره خودرو در ارومیه" width="1200" height="630" class="w-full h-64 md:h-80 object-cover rounded-2xl mb-6" fetchpriority="high" />
+    <h1 class="text-2xl md:text-3xl font-bold text-brand-800 mb-4">اجاره خودرو در ارومیه</h1>
+    <p class="text-gray-700 leading-8 mb-6">اجاره خودرو، ون VIP و تاکسی فرودگاه به هتل در ارومیه برای مسافران. برای اطلاع از جزئیات و قیمت دقیق، با دفتر آکای تراول تماس بگیرید.</p>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-3">انواع خودرو</h2>
+      <p class="text-gray-700 leading-8 mb-4">از ون VIP تا تاکسی فرودگاه به هتل، گزینه‌های حمل‌ونقل متنوعی ارائه می‌شود. برای اطلاع از جزئیات و قیمت دقیق، با دفتر آکای تراول تماس بگیرید.</p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-brand-700 mb-4">رزرو خودرو</h2>
+      <ReservationButtons pageName="اجاره خودرو در ارومیه" />
+    </section>
+
+    <nav class="text-sm text-gray-500">
+      <a href="/" class="text-brand-600 hover:underline">خانه</a> | <a href="/tours/urmia-van-combined-tour" class="text-brand-600 hover:underline">تورها</a> | <a href="/hotels" class="text-brand-600 hover:underline">هتل‌ها</a>
+    </nav>
+  </article>
+</BaseLayout>
