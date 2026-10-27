@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/hotels/ada", "destination": "/hotels/mandegar-urmia", "permanent": true },
+    { "source": "/hotels/ada-urmia", "destination": "/hotels/mandegar-urmia", "permanent": true }
+  ]
+}
